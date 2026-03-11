@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-mono: 'IBM Plex Mono', 'JetBrains Mono', 'Menlo', monospace;
+    --font-sans: 'Manrope', 'Inter', sans-serif;
+
+    --background: 223 64% 4%;
+    --foreground: 210 20% 96%;
+    --card: 226 56% 6%;
+    --card-foreground: 210 20% 96%;
+    --popover: 226 56% 6%;
+    --popover-foreground: 210 20% 96%;
+    --primary: 202 100% 62%;
+    --primary-foreground: 223 64% 4%;
+    --secondary: 223 28% 12%;
+    --secondary-foreground: 210 20% 96%;
+    --muted: 223 24% 11%;
+    --muted-foreground: 216 16% 64%;
+    --accent: 202 100% 62%;
+    --accent-foreground: 223 64% 4%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 96%;
+    --border: 220 34% 17%;
+    --input: 220 34% 17%;
+    --ring: 202 100% 62%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased overflow-x-hidden;
+    font-family: var(--font-mono);
+    line-height: 1.6;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    min-height: 100vh;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      linear-gradient(rgba(35, 59, 102, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(35, 59, 102, 0.04) 1px, transparent 1px);
+    background-size: 44px 44px;
+    opacity: 0.14;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+
+  a,
+  button {
+    font-family: inherit;
+  }
+
+  ::selection {
+    background: rgba(96, 194, 255, 0.28);
+    color: #d9f4ff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(5, 10, 22, 0.95);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, rgba(86, 176, 255, 0.65), rgba(44, 113, 201, 0.65));
+    border-radius: 999px;
+  }
+}
+
+@layer components {
+  .terminal-shell {
+    border: 1px solid rgba(39, 58, 92, 0.95);
+    background: rgba(2, 6, 14, 0.88);
+    box-shadow:
+      0 18px 50px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(4px);
+  }
+
+  .terminal-titlebar {
+    background: linear-gradient(180deg, rgba(11, 16, 30, 0.96), rgba(8, 13, 24, 0.96));
+    border-bottom: 1px solid rgba(30, 45, 73, 0.78);
+  }
+
+  .terminal-grid {
+    background:
+      linear-gradient(rgba(31, 48, 79, 0.11) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(31, 48, 79, 0.11) 1px, transparent 1px),
+      linear-gradient(180deg, rgba(2, 5, 12, 0.985), rgba(1, 4, 10, 0.985));
+    background-size: 38px 38px, 38px 38px, 100% 100%;
+  }
+
+  .traffic-dot {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    border-radius: 999px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .section-kicker {
+    color: #5ab3ff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .stars-layer {
+    --star-shadow: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+    box-shadow: var(--star-shadow);
+  }
+
+  .stars-layer::after {
+    content: "";
+    position: absolute;
+    top: 2000px;
+    left: 0;
+    background: transparent;
+    box-shadow: var(--star-shadow);
+  }
+
+  .stars-small {
+    width: 1px;
+    height: 1px;
+    animation: animStar 50s linear infinite;
+  }
+
+  .stars-small::after {
+    width: 1px;
+    height: 1px;
+  }
+
+  .stars-medium {
+    width: 2px;
+    height: 2px;
+    animation: animStar 100s linear infinite;
+  }
+
+  .stars-medium::after {
+    width: 2px;
+    height: 2px;
+  }
+
+  .stars-large {
+    width: 3px;
+    height: 3px;
+    animation: animStar 150s linear infinite;
+  }
+
+  .stars-large::after {
+    width: 3px;
+    height: 3px;
+  }
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-2000px);
+  }
+}
